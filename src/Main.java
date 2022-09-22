@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class Main {
     public static void main(String[] args) {
@@ -8,15 +9,16 @@ public class Main {
         Figura rectangulo=new Rectangulo(6.689,1.161);
         Figura cuadrado=new Cuadrado(6.74,6.74);
 
-        double[] List={triangulo.area(),circulo.area(),rectangulo.area(),cuadrado.area()};
+        Figura[] List={triangulo,circulo,rectangulo,cuadrado};
 
-        Arrays.sort(List);
-        double sum = Arrays.stream(List).sum();
+        Arrays.sort(List, Comparator.comparing(Figura::area));
 
-        System.out.println("Array Sum = "+sum);
-        for (double i : List) {
-            System.out.print(i + ", ");
+        double suma=0;
+        for (Figura i : List) {
+            System.out.print(i + " -> "+i.area()+"\n");
+            suma=suma+ i.area();
         }
+        System.out.print("La suma de las areas es: "+suma);
     }
 }
 
